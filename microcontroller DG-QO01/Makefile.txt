@@ -1,0 +1,22 @@
+OPCS = --model-small
+
+TRG=simpledigi
+HEADERFILES = fx2regs_c.h
+
+all: $(TRG).ihx
+
+$(TRG).ihx: $(TRG).c $(HEADERFILES)
+	sdcc $(OPCS) $(TRG).c
+	grep "_Descriptors:" $(TRG).rst
+	grep "_Descriptors2:" $(TRG).rst
+	grep "_StringDescriptors:" $(TRG).rst
+
+.PHONPY: clean
+clean:
+	rm -f *~
+	rm -f $(TRG).asm
+	rm -f $(TRG).ihx
+	rm -f $(TRG).l*
+	rm -f $(TRG).m*
+	rm -f $(TRG).r*
+	rm -f $(TRG).sym

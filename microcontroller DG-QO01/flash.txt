@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# script to upload firmware into cypress chip
+
+# source program:
+firmware="simpledigi.ihx"
+
+#search naked Ez-USB chip
+#a=$(/usr/bin/lsusb |grep "04b4:8613")
+# This is for a programmed chip
+a=$(/usr/bin/lsusb |grep "04b4:4717")
+
+# check if board is present
+if test -z "$a";
+   then
+   echo "No naked EZ-usb chip was found. Perhaps reset the board?"
+   exit -1
+fi;
+
+# create the corresponding device file
+b=$(echo $a |sed 's/Bus \([0-9]\{3\}\).* \([0-9]\{3\}\).*/\/dev\/bus\/usb\/\1\/\2/m')
+
+# run the loader
+sudo /sbin/fxload -I $firmware -t fx2 -vv -D $b -c 0 -s Vend_Ax.hex 

@@ -1,0 +1,4 @@
+Serial numbers for the simple digital interface
+
+DG-QO01	       svn-2; went to Jose Carlos with the graphene ppl
+DG-QO02	       svn-3; demo unit, not in use yet
